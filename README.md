@@ -92,5 +92,3 @@ The most important step is to configure the code for **your specific remote**.
 #define FORWARD_SPEED 100     // Speed when seeking (0-255).
 #define TURN_SPEED 150        // Speed when turning (0-255).
 
-3. Upload and Run!
-After configuring the remote codes and tuning the constants, upload the code to your Arduino, power on the robot, and it will begin its seek-and-avoid cycle!
