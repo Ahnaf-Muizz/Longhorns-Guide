@@ -1,0 +1,70 @@
+# LongHorn Guide — HackTX 2025 ARM Track Winner 🏆  
+### Intelligent Multilingual Campus Assistant
+
+---
+
+## 🎯 Inspiration
+Starting college is exciting — but it can also be overwhelming.  
+New students at UT Austin often struggle to find buildings, discover resources, or ask for help without hesitation.  
+
+**LongHorn Guide** was created to solve that: a friendly, voice-first, AI-powered campus companion — available as a mobile app, chatbot, and even a physical robot escort — so every student can feel confident navigating campus life.
+
+---
+
+## 💡 What It Does
+**LongHorn Guide** combines AI, automation, and robotics into a seamless experience:
+- 🗣️ **Voice-First Agent** – Call anytime via an ElevenLabs mobile agent integrated with Twilio (multilingual support).  
+- 💬 **Smart Chat Widget** – Ask natural-language questions through our Gemini-powered chat assistant.  
+- 🧠 **Productivity Tools** – Manage schedules, send emails, and automate tasks using real-time n8n workflows.  
+- 🤖 **Robot Escort** – Our autonomous Arduino-powered robot physically guides students to campus locations.
+
+---
+
+## 🧩 How We Built It
+| Component | Tools / Tech |
+|------------|-------------|
+| **Frontend & Mobile** | React Native + Expo + CSS |
+| **AI & Voice** | Google Gemini API + ElevenLabs + Twilio |
+| **Automation** | n8n (local host + webhooks) |
+| **Backend / Database** | Firebase (Realtime DB + Auth) |
+| **Hardware** | Arduino Mega + Sensor Shield + Raspberry Pi 4 (ARM 64-bit) |
+
+### 🧠 My Contribution — Arduino & Raspberry Pi Setup
+- **Arduino Mega Configuration:**  
+  - Wired and tested IR sensors and motors via the sensor shield.  
+  - Programmed core movement logic in C++ for the autonomous robot escort.  
+
+- **Raspberry Pi Integration:**  
+  - Installed and configured Raspberry Pi OS (64-bit) for ARM.  
+  - Enabled SSH and I²C interfaces for hardware communication.  
+  - Connected the Pi to the Arduino via serial communication (USB / UART).  
+  - Set up Python environment to host the AI voice agent and bridge the hardware to the Gemini / ElevenLabs services.  
+
+---
+
+## ⚙️ Raspberry Pi Setup Commands
+```bash
+# 1️⃣  System update
+sudo apt update && sudo apt upgrade -y
+
+# 2️⃣  Enable interfaces (SSH, I2C, SPI)
+sudo raspi-config nonint do_ssh 0
+sudo raspi-config nonint do_i2c 0
+sudo raspi-config nonint do_spi 0
+
+# 3️⃣  Install dependencies
+sudo apt install -y python3 python3-pip git
+
+# 4️⃣  Clone repository
+git clone https://github.com/sameerkhan-utd/LongHornGuide.git
+cd LongHornGuide
+
+# 5️⃣  Install Python libraries
+pip3 install -r requirements.txt
+
+# 6️⃣  Connect Arduino Mega via USB and verify serial port
+ls /dev/tty*
+# (typically /dev/ttyACM0)
+
+# 7️⃣  Run hardware bridge script
+python3 hardware_bridge.py
